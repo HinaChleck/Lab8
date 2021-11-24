@@ -12,42 +12,40 @@ namespace Lab8
         static void Main(string[] args)
         //Выберите любую папку на своем компьютере, имеющую вложенные директории. Выведите на консоль ее содержимое и содержимое всех подкаталогов.
         {
-            Console.WriteLine("Введите директорию");
-            string pathinput=Console.ReadLine();
-            string path=pathinput;
-            string[] directories= Directory.GetDirectories(path);
-            string[] files= Directory.GetFiles(path);
-            Console.WriteLine("{0}:\n", path);
 
-            foreach (string file in files)
+            // Программа выводит:
+            //1. перечень файлов, расположенных непосредственно в заданном каталоге
+            //2. перечисление всех файлов каталога с разбивкой по их родительским папкам вне зависимости от уровня вложенности.
+
+            Console.Write("Введите путь:  ");
+            string path = Console.ReadLine();
+            if (!Directory.Exists(@path)) Console.WriteLine("\nПуть не существует"); else
             {
-                Console.WriteLine(" {0}:", file);
-            }
-
-            foreach (string d in directories)
-            {
-
-                Console.WriteLine("  {0}:",d);
-                string[] subfiles = Directory.GetFiles(d);
-                foreach (string subfile in subfiles)
+                string[] rootfiles = Directory.GetFiles(@path);
+                foreach (string rootfile in rootfiles)
                 {
-                    string clearsubfile = subfile.Trim("d");
-                    Console.WriteLine("    {0}",subfile); }
-            }
-                /*string subdirectories[]=Directory.GetDirectories(d);
-                while (subdirectories.Length != 0)
-                                    {
-                    Console.WriteLine("{0}:"d);
-                    string subsubdirectories[]=
-                    foreach (strim s in subdirectories)
-                    {
-                        string subdirectories[] = Directory.GetDirectories(d);
-                    }
-                    }
-                
+                    string rootFileName = new FileInfo(@rootfile).Name; ;
+                    Console.WriteLine("  {0}", rootFileName);
 
-            }*/
-        Console.ReadKey();  
+                }
+                
+                string[] directories = Directory.GetDirectories(@path, "*", SearchOption.AllDirectories);
+                foreach (string dir in directories)
+                {
+                    string dirName = new DirectoryInfo(@dir).Name; ;
+                    Console.WriteLine("  {0}:", dirName);
+                    string[] files = Directory.GetFiles(@dir);
+                    foreach (string file in files)
+                    {
+                        string fileName = new FileInfo(@file).Name; ;
+                        Console.WriteLine("      {0}", fileName);
+                    }
+
+                }
+            }
+            Console.ReadKey();  
         }
+            
+        
     }
 }
