@@ -13,12 +13,12 @@ namespace Task2
             //Программно создайте текстовый файл и запишите в него 10 случайных чисел.
             //Затем программно откройте созданный файл, рассчитайте сумму чисел в нем, ответ выведите на консоль.
         {
-            string path = @"Lab8_2.txt";
 
-            if (File.Exists(path)) File.Delete(path);
-            
+            string path = @"Lab8_2.txt";
+            if (File.Exists(path))   File.Delete(path);
+
+            #region Создание и запись в файл массива случайных чисел
             string[] row=new string[10];
-            #region Создание массива случайных чисел
             Random random = new Random();
 
             for (int i = 0; i < 10; i++)
@@ -45,8 +45,8 @@ namespace Task2
                 int number=Convert.ToInt32(readrow[i]);
                 sum+=number;
             }
-            Console.WriteLine("Сумма числе в файле = {0}",sum);
-            
+            Console.WriteLine("Сумма чисел в файле = {0}",sum);
+            Console.WriteLine("\n(Создан файл: {0})", Path.GetFullPath(path));
             Console.ReadKey();  
         }
     }

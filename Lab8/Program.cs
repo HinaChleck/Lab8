@@ -24,7 +24,7 @@ namespace Lab8
                 string[] rootfiles = Directory.GetFiles(@path);
                 foreach (string rootfile in rootfiles)
                 {
-                    string rootFileName = new FileInfo(@rootfile).Name; ;
+                    string rootFileName = new FileInfo(@rootfile).Name; 
                     Console.WriteLine("  {0}", rootFileName);
 
                 }
